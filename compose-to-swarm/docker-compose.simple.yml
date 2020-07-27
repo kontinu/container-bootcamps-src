@@ -1,0 +1,28 @@
+version: "3.5"
+services:
+  web:
+    image: ${IMAGE_NAME:-mcano/compose-to-swarm:v1}
+    environment:
+      - REDIS_HOST=redis
+      - FOO=${FOO:-BAR}
+    ports:
+      - target: 5000
+        published: ${HTTP_PORT:-5000}
+        protocol: tcp
+    networks:
+      - skynet
+
+  redis:
+    image: "redis:alpine"
+    deploy:
+      replicas: 1
+    volumes:
+      - redis-vol:/data
+    networks:
+      - skynet
+
+networks:
+  skynet:
+
+volumes:
+  redis-vol:

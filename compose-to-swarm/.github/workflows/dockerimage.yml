@@ -1,0 +1,26 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      run: |
+        echo "$${secrets.DOCKER_PASSWORD}" | docker login -u $DOCKER_USER --password-stdin
+        echo "BUILDING => ${DOCKER_IMAGE_NAME}"
+        docker build . --file Dockerfile --tag ${DOCKER_IMAGE_NAME}
+      env:
+        DOCKER_IMAGE_NAME: "mcano/docker:intro"
+        DOCKER_USER: mcano
+
+    - name: docker-compose config
+      run: docker-compose config
+
+
+
