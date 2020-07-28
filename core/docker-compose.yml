@@ -24,7 +24,7 @@ services:
       timeout: 10s
       retries: 3
       start_period: 5s
-
+    #* ignorado en docker-compose
     deploy:
       replicas: ${DEPLOYMENT_REPLICAS:-3}
       restart_policy:
