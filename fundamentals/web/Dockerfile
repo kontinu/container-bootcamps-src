@@ -1,5 +1,5 @@
-FROM nginx
+FROM nginx:1.7
 
-ADD index.html /usr/share/nginx/html/
+COPY index.html /usr/share/nginx/html/
 
-ADD public /usr/share/nginx/public
+COPY images /usr/share/nginx/html/images
